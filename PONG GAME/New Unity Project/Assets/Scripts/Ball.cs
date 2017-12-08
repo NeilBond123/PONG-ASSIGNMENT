@@ -48,12 +48,16 @@ public class Ball : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // Velocity
-        GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        // If spacebar is pressed
+        if (Input.GetKeyDown("space"))
+        {
+            // Set starting velocity for ball
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+        }
 	}
 }
