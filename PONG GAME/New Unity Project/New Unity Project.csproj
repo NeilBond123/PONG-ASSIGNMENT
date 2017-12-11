@@ -223,6 +223,7 @@
     <Compile Include="Assets\Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\Paddle1.cs" />
     <Compile Include="Assets\Scripts\Paddle2.cs" />
+    <Compile Include="Assets\Scripts\QuitButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
