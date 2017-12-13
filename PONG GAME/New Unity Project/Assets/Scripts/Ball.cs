@@ -4,6 +4,34 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
 
+    // Score for left player
+    public static int scoreL = 0;
+
+    // Score for right player
+    public static int scoreR = 0;
+
+
+    // Update left score
+    void ScoreUpdaterLeftScript()
+    {
+        gameObject.GetComponent<ScoreUpdater>().updateLeft(scoreL, scoreR);
+    }
+
+    // Update right score
+    void ScoreUpdaterRightScript()
+    {
+        gameObject.GetComponent<ScoreUpdater>().updateRight(scoreL, scoreR);
+    }
+
+
+    // Go to level loader once score is reached
+    void LevelLoaderScript()
+    {
+        gameObject.GetComponent<LevelLoader>().startLevel();
+    }
+
+
+    // Set ball direction
     public float speed = 30;
 
     float onHit(Vector2 ballPos, Vector2 racketPos,
@@ -12,6 +40,8 @@ public class Ball : MonoBehaviour {
         return (ballPos.y - racketPos.y) / racketHeight;
     }
 
+
+    // SCRIPT FOR RACKET HITS
     void OnCollisionEnter2D(Collision2D col)
     {
 
@@ -44,7 +74,65 @@ public class Ball : MonoBehaviour {
             // Velocity
             GetComponent<Rigidbody2D>().velocity = dir * speed;
         }
+
+        // SCRIPT FOR BOUNDARIES
+        
+        if (col.gameObject.name == "ScoreBoundaryLeft")
+        {
+            scoreR++;
+            //ScoreUpdaterLeftScript();
+
+            // WHEN IN LEVEL 1:
+            if (scoreR == 5)
+            {
+                LevelLoaderScript();
+            }
+
+            //WHEN IN LEVEL 2:
+            if (scoreR == 10)
+            {
+                LevelLoaderScript();
+            }
+
+            //WHEN IN LEVEL 3:
+            if (scoreR == 15)
+            {
+                LevelLoaderScript();
+            }
+        }
+
+        if (col.gameObject.name == "ScoreBoundaryRight")
+        {
+            scoreL++;
+            //ScoreUpdaterRightScript();
+
+            // WHEN IN LEVEL 1:
+            if (scoreL == 5)
+            {
+                LevelLoaderScript();
+            }
+
+            //WHEN IN LEVEL 2:
+            if (scoreL == 10)
+            {
+                LevelLoaderScript();
+            }
+
+            //WHEN IN LEVEL 3:
+            if (scoreL == 15)
+            {
+                LevelLoaderScript();
+            }
+        }
+
+
+
+
     }
+
+
+
+
 
     // Use this for initialization
     void Start () {
