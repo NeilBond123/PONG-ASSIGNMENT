@@ -1,35 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
 
     // Score for left player
     public static int scoreL = 0;
-
     // Score for right player
     public static int scoreR = 0;
-
 
     // Update left score
     void ScoreUpdaterLeftScript()
     {
-        gameObject.GetComponent<ScoreUpdater>().updateLeft(scoreL, scoreR);
+        gameObject.GetComponent<ScoreUpdater>().updateLeft(scoreL);
     }
-
     // Update right score
     void ScoreUpdaterRightScript()
     {
-        gameObject.GetComponent<ScoreUpdater>().updateRight(scoreL, scoreR);
+        gameObject.GetComponent<ScoreUpdater>().updateRight(scoreR);
     }
-
 
     // Go to level loader once score is reached
     void LevelLoaderScript()
     {
         gameObject.GetComponent<LevelLoader>().startLevel();
     }
-
 
     // Set ball direction
     public float speed = 30;
@@ -40,12 +36,10 @@ public class Ball : MonoBehaviour {
         return (ballPos.y - racketPos.y) / racketHeight;
     }
 
-
     // SCRIPT FOR RACKET HITS
     void OnCollisionEnter2D(Collision2D col)
     {
-
-        // Hit the left Racket?
+        // Hit the left paddle?
         if (col.gameObject.name == "paddle1")
         {
             // Get position of hit
@@ -60,7 +54,7 @@ public class Ball : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = dir * speed;
         }
 
-        // Right paddle
+        // Hit the right paddle?
         if (col.gameObject.name == "paddle2")
         {
             // Get position of hit
@@ -76,63 +70,77 @@ public class Ball : MonoBehaviour {
         }
 
         // SCRIPT FOR BOUNDARIES
-        
         if (col.gameObject.name == "ScoreBoundaryLeft")
         {
             scoreR++;
-            //ScoreUpdaterLeftScript();
+            ScoreUpdaterRightScript();
+
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
 
             // WHEN IN LEVEL 1:
-            if (scoreR == 5)
+            if (currentScene == 1)
             {
-                LevelLoaderScript();
+                if (scoreR == 5)
+                {
+                    LevelLoaderScript();
+                }
             }
 
             //WHEN IN LEVEL 2:
-            if (scoreR == 10)
+            if (currentScene == 2)
             {
-                LevelLoaderScript();
+                if (scoreR == 10)
+                {
+                    LevelLoaderScript();
+                }
             }
 
             //WHEN IN LEVEL 3:
-            if (scoreR == 15)
+            if (currentScene == 3)
             {
-                LevelLoaderScript();
+                if (scoreR == 15)
+                {
+                    LevelLoaderScript();
+                }
             }
         }
 
         if (col.gameObject.name == "ScoreBoundaryRight")
         {
             scoreL++;
-            //ScoreUpdaterRightScript();
+            ScoreUpdaterLeftScript();
+
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
 
             // WHEN IN LEVEL 1:
-            if (scoreL == 5)
+            if (currentScene == 1)
             {
-                LevelLoaderScript();
+                if (scoreL == 5)
+                {
+                    LevelLoaderScript();
+                }
             }
 
             //WHEN IN LEVEL 2:
-            if (scoreL == 10)
+            if (currentScene == 2)
             {
-                LevelLoaderScript();
+                if (scoreL == 10)
+                {
+                    LevelLoaderScript();
+                }
             }
 
             //WHEN IN LEVEL 3:
-            if (scoreL == 15)
+            if (currentScene == 3)
             {
-                LevelLoaderScript();
+                if (scoreL == 15)
+                {
+                    LevelLoaderScript();
+                }
             }
         }
 
-
-
-
     }
-
-
-
-
 
     // Use this for initialization
     void Start () {
