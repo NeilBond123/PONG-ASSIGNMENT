@@ -221,6 +221,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\LevelLoader.cs" />
+    <Compile Include="Assets\Scripts\ObjectRotation.cs" />
     <Compile Include="Assets\Scripts\Paddle1.cs" />
     <Compile Include="Assets\Scripts\Paddle2.cs" />
     <Compile Include="Assets\Scripts\QuitButton.cs" />

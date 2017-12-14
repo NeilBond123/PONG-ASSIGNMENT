@@ -32,6 +32,11 @@ public class LevelLoader : MonoBehaviour {
         {
             SceneManager.LoadScene(4); // Load winner screen
         }
+
+        else if (currentScene == 4) // If win scene reached and button pressed
+        {
+            SceneManager.LoadScene(0); // reload menu
+        }
     }
 	// Use this for initialization
 
