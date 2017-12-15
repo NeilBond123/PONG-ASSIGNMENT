@@ -21,6 +21,11 @@ public class Ball : MonoBehaviour {
         gameObject.GetComponent<ScoreUpdater>().updateRight(scoreR);
     }
 
+    //void ToDisplayFinalScore()
+    //{
+        
+    //}
+
     // Go to level loader once score is reached
     void LevelLoaderScript()
     {
@@ -144,7 +149,12 @@ public class Ball : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        int checkIfLastScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (checkIfLastScene == 4)
+        {
+            gameObject.GetComponent<ScoreUpdater>().finalScore(scoreL, scoreR);
+        }
     }
 	
 	// Update is called once per frame

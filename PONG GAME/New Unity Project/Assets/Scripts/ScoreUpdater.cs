@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class ScoreUpdater : MonoBehaviour {
     public Text displayL;
     public Text displayR;
-
+    public Text endScore;
+    
     // Used to display score needed to win the game
     public static int winScore = 5;
 
@@ -63,13 +64,20 @@ public class ScoreUpdater : MonoBehaviour {
         }
 
         // Finally display right player's score and level's win score
-        displayR.text = "Score Right: " + scoreR.ToString() + "/" + winScore; 
+        displayR.text = "Score Right: " + scoreR.ToString() + "/" + winScore;
+
+    }
+
+    // Display final score
+    public void finalScore(int scoreL, int scoreR)
+    {
+        endScore.text = scoreL.ToString() + "-" + scoreR.ToString();
     }
 
     // Use this for initialization
     void Start () {
         
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
